@@ -15,9 +15,7 @@ useEffect(()=>{
       setNotlar(json)
     }
   }
-  
-fetchNotlar()
-
+  fetchNotlar()
 },[])
   return (
     <div className="home">
