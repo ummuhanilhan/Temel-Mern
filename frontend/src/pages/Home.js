@@ -3,6 +3,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import '../index.css'
 import  NotDetay from '../components/NotDetay'
+import NotForm from '../components/NotForm'
 export default function Home() {
 const [notlar,setNotlar]=useState(null)
 useEffect(()=>{
@@ -20,6 +21,9 @@ fetchNotlar()
 },[])
   return (
     <div className="home">
+    <div className='not-form'>
+<NotForm/>
+    </div>
         <div className='notlar'>
         {notlar && notlar.map((not)=>(
           <NotDetay key={not._id} not={not}/>
