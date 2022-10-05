@@ -1,10 +1,13 @@
 import {useState} from 'react'
+import {useNotContext} from '../hooks/useNotContext'
 
 export default function NotForm() {
 
     const [baslik,setBaslik]=useState('')
     const [aciklama,setAciklama]=useState('')
     const [hata,setHata]=useState(null)
+
+    const {dispatch}=useNotContext();
 
     const handleSubmit=async (e)=>{
         e.preventDefault();
@@ -18,7 +21,7 @@ export default function NotForm() {
                 }
         })
         const json=await response.json()
-        console.log(json);
+       // console.log(json);
 
         if(!response.ok){
             setHata(json.hata)
@@ -27,7 +30,8 @@ export default function NotForm() {
             setHata(null)
             setBaslik('')
             setAciklama('')
-            console.log('yeni bir not eklendi', json)
+            dispatch({type:'NOT_OLUSTUR', payload:json})
+           // console.log('yeni bir not eklendi', json)
         }
     } 
   return (
