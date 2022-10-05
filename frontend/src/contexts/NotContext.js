@@ -12,6 +12,12 @@ export const notReducer=(state,action)=>{
                 return {
                     notlar:action.payload
     }
+    case 'NOT_SIL':
+        return {
+            notlar:state.notlar.filter((n)=>n._id!==action.payload)
+            
+        }
+
     default:
         return state
 }
