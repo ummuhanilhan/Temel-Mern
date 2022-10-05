@@ -1,5 +1,6 @@
 import { useNotContext } from "../hooks/useNotContext"
-
+import moment from "moment"
+import 'moment/locale/tr'
 export default function NotDetay({not}) {
 
   const {dispatch}=useNotContext()
@@ -19,7 +20,7 @@ export default function NotDetay({not}) {
     <div className="not-detay">
         <h4>{not.baslik}</h4>
         <p>{not.aciklama}</p>
-        <p>{not.createdAt}</p>
+        <p>{moment(new Date(not.createdAt)).fromNow()}</p>
         <span onClick={handleClick}>x</span>
     </div>
   )
