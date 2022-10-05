@@ -21,7 +21,7 @@ export default function NotDetay({not}) {
         <h4>{not.baslik}</h4>
         <p>{not.aciklama}</p>
         <p>{moment(new Date(not.createdAt)).fromNow()}</p>
-        <span onClick={handleClick}>x</span>
+        <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
     </div>
   )
 }
