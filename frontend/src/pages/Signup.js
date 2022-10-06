@@ -1,13 +1,16 @@
 import {useState} from 'react'
-
-export default function Sigmup() {
+import {useSignup} from '../hooks/useSignup'
+export default function Signup() {
 
     const [email,setEmail]=useState('')
-    const [password,setPassword]=useState('')
+    const [parola,setParola]=useState('')
+    const {signup,hata,yukleniyor}=useSignup()
 
     const handleSubmit=async (e)=>{
         e.preventDefault();
-           console.log(email,password);
+         //  console.log(email,password);
+    
+         await signup(email,parola)
     }
 
   return (
@@ -16,8 +19,9 @@ export default function Sigmup() {
         <label>Email:</label>
         <input type='email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
         <label>Şifre:</label>
-        <input type='password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
-        <button type='submit'>Üye ol</button>
+        <input type='password' value={parola} onChange={(e)=>setParola(e.target.value)}/>
+        <button disabled={yukleniyor} type='submit'>Üye ol</button>
+        {hata && <div className='error'>{hata}</div>}
     </form>
   )
 }
