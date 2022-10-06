@@ -7,6 +7,12 @@ export default function Navbar() {
         <Link to="/">
             <h1>Bilinova Not Defteri</h1>
         </Link>
+        <nav>
+          <div>
+            <Link to="/signup">Üye ol</Link>
+            <Link to="/login">Giriş yap</Link>
+          </div>
+          </nav>
         </div>
     </header>
   )
