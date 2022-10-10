@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 import {useState} from 'react'
 import {useNotContext} from '../hooks/useNotContext'
+import {useAuthContext} from '../hooks/useAuthContext'
 
 export default function NotForm() {
 
@@ -11,16 +12,26 @@ export default function NotForm() {
     const[bosAlanlar,setBosalanlar]=useState([])
 
     const {dispatch}=useNotContext();
+    const {kullanici}=useAuthContext()
+
+
 
     const handleSubmit=async (e)=>{
         e.preventDefault();
+
+    if(!kullanici){
+        setHata('Not eklemek için giriş yapmalısınız')
+        return
+    }
+
         const not={baslik,aciklama}
         // console.log(not);
         const response=await fetch('/api/notlar',{
             method:'POST',
             body:JSON.stringify(not),
                 headers: {
-                    'Content-Type' : 'application/json'
+                    'Content-Type' : 'application/json',
+                   'Authorization':`Bearer ${kullanici.token}`
                 }
         })
         const json=await response.json()
@@ -45,7 +56,7 @@ export default function NotForm() {
     <div className='create-group'>
     <div>
         <label>Not Başlık:</label>
-        <input classNmae={bosAlanlar.includes('baslik') ? 'error' :'' } type="text" onChange={(e)=>setBaslik(e.target.value)} value={baslik}/>
+        <input className={bosAlanlar.includes('baslik') ? 'error' :'' } type="text" onChange={(e)=>setBaslik(e.target.value)} value={baslik}/>
     </div>
     <div>
         <label>Not Açıklama:</label>

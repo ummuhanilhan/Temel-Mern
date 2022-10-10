@@ -1,13 +1,23 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import { useNotContext } from "../hooks/useNotContext"
 import moment from "moment"
 import 'moment/locale/tr'
+import { useAuthContext } from "../hooks/useAuthContext"
 export default function NotDetay({not}) {
 
   const {dispatch}=useNotContext()
 
   const handleClick=async () => {
+
+    if(!kullanici){
+      return
+    }
+
     const response =await fetch(`/api/notlar/`+not._id,{
-      method:'DELETE'
+      method:'DELETE',
+      headers:{
+        'Authorization':`Bearer ${kullanici.token}` }
       })
       const json=await response.json()
       if(response.ok){
